@@ -92,7 +92,7 @@
         <record model="ir.actions.act_window" id="action_project_scrum_sprint">
             <field name="name">Sprint</field>
             <field name="res_model">project.scrum.sprint</field>
-            <field name="view_type">form</field>
+            <!--<field name="view_type">form</field>-->
             <field name="view_mode">tree,form,calendar</field>
         </record>
         <menuitem action="action_project_scrum_sprint"
@@ -156,8 +156,9 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="action_meeting_form">
+            <field name="name">Meetings</field>
             <field name="res_model">project.scrum.meeting</field>
-            <field name="view_type">form</field>
+            <!--<field name="view_type">form</field>-->
             <field name="view_mode">tree,form,calendar</field>
             <field name="help">The scrum agile methodology is used in software development projects. In this methodology, a daily meeting is organized by the scrum master with his team in order to detect the difficulties the team faced/will face.</field>
         </record>
@@ -322,7 +323,7 @@
         <record model="ir.actions.act_window" id="action_project_scrum_product_backlog">
             <field name="name">Product Backlog</field>
             <field name="res_model">project.scrum.product.backlog</field>
-            <field name="view_type">form</field>
+            <!--<field name="view_type">form</field>-->
             <field name="view_mode">kanban,tree,form</field>
         </record>
         <menuitem action="action_project_scrum_product_backlog"

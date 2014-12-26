@@ -37,8 +37,8 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="action_project_scrum_role">
+            <field name="name">Roles</field>
             <field name="res_model">project.scrum.role</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
         <menuitem action="action_project_scrum_role"

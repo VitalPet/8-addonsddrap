@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="ir_ui_view_new_project_scrum_backlog_search_r0" model="ir.ui.view">
+      <field name="name">project.scrum.backlog.search</field>
+      <field name="active" eval="True"/>
+      <field name="arch" type="xml">
+        <search string="Search stories">
+          <field name="description" filter_domain="['|',('name','ilike',self),('description','ilike',self)]"/>
+          <field name="id"/>
+          <field name="project_id"/>
+          <field name="release_id"/>
+          <field name="sprint_id"/>
+          <field name="feature_id"/>
+          <filter string="Project" domain="[]" context="{'group_by':'project_id'}"/>
+          <filter string="Release" domain="[]" context="{'group_by':'release_id'}"/>
+          <filter string="Feature" domain="[]" context="{'group_by':'feature_id'}"/>
+          <filter string="Sprint" domain="[]" context="{'group_by':'sprint_id'}"/>
+          <filter string="Stages" domain="[]" context="{'group_by':'stage_id'}"/>
+          <filter string="Author" domain="[]" context="{'group_by':'user_id'}"/>
+        </search>
+      </field>
+      <!-- one2many field 'inherit_children_ids' managed on the ir.ui.view side -->
+      <field name="mode">primary</field>
+      <field name="model">project.scrum.product.backlog</field>
+      <!-- MISSING xml_id for field model_data_id (many2one to ir.model.data) for those ids: 13218 (db: sdk_migrate01@txs_80.local.txs.fr:80) -->
+      <!-- one2many field 'model_ids' managed on the ir.model.data side -->
+      <field name="page" eval="False"/>
+      <field name="priority">16</field>
+      <field name="type">search</field>
+    </record>
+    <record id="ir_ui_view_new_project_scrum_product_sandbox_tree_r0" model="ir.ui.view">
+      <field name="name">project.scrum.product.sandbox.tree</field>
+      <field name="active" eval="True"/>
+      <field name="arch" type="xml">
+        <tree string="Product Backlog" editable="bottom">
+          <field name="id" readonly="1"/>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="feature_id" context="{'default_project_ids': [(6,0,[project_id])]}" domain="[('project_ids','=', project_id)]"/>
+          <field name="user_id"/>
+          <field name="project_id" invisible="1"/>
+          <button type="object" attrs="{'invisible': [('state','not in',['draft'])]}"  string="Validate" name="button_validate" icon="terp-camera_test" options="{&quot;always_reload&quot;: True}"/>
+          <button type="object" attrs="{'invisible': [('state','not in',['draft'])]}"  string="Cancel" name="button_refuse" icon="terp-dialog-close"/>
+          <field name="stage_id" invisible="1" options="{&quot;always_reload&quot;: True}"/>
+          <field name="state" invisible="1"/>
+        </tree>
+      </field>
+      <field name="display_name">project.scrum.product.sandbox.tree</field>
+      <!-- one2many field 'inherit_children_ids' managed on the ir.ui.view side -->
+      <field name="mode">primary</field>
+      <field name="model">project.scrum.product.backlog</field>
+      <!-- MISSING xml_id for field model_data_id (many2one to ir.model.data) for those ids: 6075 (db: test2@192.168.59.103) -->
+      <!-- one2many field 'model_ids' managed on the ir.model.data side -->
+      <field name="priority">16</field>
+      <field name="type">tree</field>
+    </record>
+    <record id="ir_ui_view_new_project_scrum_release_search_r0" model="ir.ui.view">
+      <field name="name">project.scrum.release.search</field>
+      <field name="active" eval="True"/>
+      <field name="arch" type="xml">
+        <search string="Search Reases">
+          <field name="project_id"/>
+          <filter string="Project" domain="[]" context="{'group_by':'project_id'}"/>
+        </search>
+      </field>
+      <field name="display_name">project.scrum.release.search</field>
+      <!-- one2many field 'inherit_children_ids' managed on the ir.ui.view side -->
+      <field name="mode">primary</field>
+      <field name="model">project.scrum.release</field>
+      <!-- MISSING xml_id for field model_data_id (many2one to ir.model.data) for those ids: 6076 (db: test2@192.168.59.103) -->
+      <!-- one2many field 'model_ids' managed on the ir.model.data side -->
+      <field name="page" eval="False"/>
+      <field name="priority">16</field>
+      <field name="type">search</field>
+    </record>
+    <record id="ir_ui_view_new_project_scrum_sprint_search_r0" model="ir.ui.view">
+      <field name="name">project.scrum.sprint.search</field>
+      <field name="active" eval="True"/>
+      <field name="arch" type="xml">
+        <search string="Search Sprint">
+          <field name="project_id"/>
+          <filter string="Project" domain="[]" context="{'group_by':'project_id'}"/>
+        </search>
+      </field>
+      <field name="display_name">project.scrum.sprint.search</field>
+      <!-- one2many field 'inherit_children_ids' managed on the ir.ui.view side -->
+      <field name="mode">primary</field>
+      <field name="model">project.scrum.sprint</field>
+      <!-- MISSING xml_id for field model_data_id (many2one to ir.model.data) for those ids: 6077 (db: test2@192.168.59.103) -->
+      <!-- one2many field 'model_ids' managed on the ir.model.data side -->
+      <field name="priority">16</field>
+      <field name="type">search</field>
+    </record>
+    <record id="ir_ui_view_new_project_task_type_inherit_scrum_r0" model="ir.ui.view">
+      <field name="name">project.task.type.inherit_scrum</field>
+      <field name="active" eval="True"/>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="code"/>
+        </field>
+      </field>
+      <field name="display_name">project.task.type.inherit_scrum</field>
+      <!-- one2many field 'inherit_children_ids' managed on the ir.ui.view side -->
+      <field name="inherit_id" ref="project.task_type_edit"/>
+      <field name="mode">extension</field>
+      <field name="model">project.task.type</field>
+      <!-- one2many field 'model_ids' managed on the ir.model.data side -->
+      <field name="priority">17</field>
+      <field name="type">form</field>
+    </record>
+  </data>
+</openerp>

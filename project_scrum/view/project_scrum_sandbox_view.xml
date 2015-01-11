@@ -33,7 +33,7 @@
         <record model="ir.actions.act_window" id="action_project_scrum_sandbox">
             <field name="name">Sandbox</field>
             <field name="res_model">project.scrum.sandbox</field>
-            <!--<field name="view_type">form</field>-->
+            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
         <menuitem action="action_project_scrum_sandbox"

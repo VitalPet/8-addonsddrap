@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <openerp>
     <data>
+	<record id="act_project_project_2_project_scrum_pb_all" model="ir.actions.act_window">
+            <field name="name">Sandbox</field>
+            <field name="res_model">project.scrum.product.backlog</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'search_default_project_id': [active_id],
+                'default_project_id': active_id,
+                'active_test': False,
+            }</field>
+            <field name="help" type="html">
+                <p>
+                    Odoo's project management allows you to manage the pipeline
+                    of customer story in order to get things done efficiently.
+                </p>
+            </field>
+        </record>
         <!-- inherited view of edit_project (project.project form view) -->
         <record model="ir.ui.view" id="view_project_project_form" >
             <field name="name">project.project.form</field>
@@ -11,23 +27,35 @@
                     <field name="is_scrum" class="oe_inline"/>
                     <label for="is_scrum"/>
                 </xpath>
-                <!--
-                <label for="use_tasks" position="after">
-                    <field name="is_scrum" class="oe_inline"/>
-                    <label for="is_scrum"/>
-                </label>
-                <field name="user_id" position="replace">
-                    <field name="user_id" attrs="{'invisible':[('is_scrum', '=', True)]}"/>
+                <field name="partner_id" position="after">
+                    <newline/>
                     <field name="scrum_master_id" attrs="{'invisible':[('is_scrum', '=', False)]}"/>
+                    <newline/>
                     <field name="product_owner_id" attrs="{'invisible':[('is_scrum', '=', False)]}"/>
                 </field>
-                -->
-                <page string="Team" position="after">
-                    <page string="Goal" attrs="{'invisible':[('is_scrum', '=', False)]}">
+                
+		<page string="Team" position="after">
+                    <page string="Scrum" attrs="{'invisible':[('is_scrum', '=', False)]}">
+                        <button class="oe_inline oe_stat_button" type="action" name="%(action_project_scrum_product_sandbox_all)d" icon="fa-tasks">
+                            <field string="Sandbox" name="sandbox_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_inline oe_stat_button" type="action" name="%(action_project_scrum_product_backlog_all)d" icon="fa-tasks">
+                            <field string="Stories" name="story_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_inline oe_stat_button" type="action" name="%(action_project_scrum_sprint_all)d" icon="fa-tasks">
+                            <field string="Sprints" name="sprint_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_inline oe_stat_button" type="action" name="%(action_project_scrum_release_all)d" icon="fa-tasks">
+                            <field string="Releases" name="release_count" widget="statinfo"/>
+                        </button>
+                        <newline/>
+                        <label for="goal" string="Goal"/>
                         <field name="goal"/>
-                    </page>
-		    <page string="Backlog stages" attrs="{'invisible':[('is_scrum', '=', False)]}">
+                        <label for="pb_stages_ids" string="Backlog stages"/>
                         <field name="pb_stage_ids"/>
+                        <label for="pb_feature_ids" string="Project Features"/>
+                        <field name="pb_feature_ids"/>
+
                     </page>
                 </page>
             </field>
@@ -49,6 +77,44 @@
         </record>
         -->
 
+       <record id="view_project_kanban_inherited" model="ir.ui.view">
+            <field name="name">project.project.kanban.inherited</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <field name="use_tasks" position="after">
+                    <field name="is_scrum"/>
+                    <field name="sandbox_count" invisible="1"/>
+                    <field name="story_count" invisible="1"/>
+                    <field name="sprint_count" invisible="1"/>
+                    <field name="release_count" invisible="1"/>
+                </field>
+                <xpath expr="//div[contains(@class, 'oe_kanban_project_list')]" position="inside">
+                    <br/> 
+                    <a t-if="record.is_scrum.raw_value" style="margin-right: 10px"
+                        name="%(action_project_scrum_product_sandbox_all)d" type="action">
+                        <field name="sandbox_count"/> Sandbox
+                    </a>
+                    <br/>
+                    <a t-if="record.is_scrum.raw_value" style="margin-right: 10px"
+                        name="%(action_project_scrum_product_backlog_all)d" type="action">
+                        <field name="story_count"/> Backlog
+                    </a>
+                    <br/>
+                    <a t-if="record.is_scrum.raw_value" style="margin-right: 10px"
+                        name="%(action_project_scrum_sprint_all)d" type="action">
+                        <field name="sprint_count"/> Sprints
+                    </a>
+                    <br/>
+                    <a t-if="record.is_scrum.raw_value" style="margin-right: 10px"
+                        name="%(action_project_scrum_release_all)d" type="action">
+                        <field name="release_count"/> Releases
+                    </a>
+                </xpath>
+            </field>
+        </record>
+
+
         <record id="project.act_project_project_2_project_task_all" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
@@ -57,7 +123,7 @@
                 'search_default_project_id': [active_id],
                 'default_project_id': active_id,
                 'active_test': False,
-				'search_default_cursprint': 1,
+		'search_default_cursprint': 1,
             }</field>
             <field name="search_view_id" ref="project.view_task_search_form"/>
             <field name="help" type="html">

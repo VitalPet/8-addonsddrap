@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
+
 {
-    'name': "Project Scrum Management",
-    'version': "0.1",
-    'author': "EL2DE - David DRAPEAU",
-    'category': "Project Scrum Management",
-    'summary': 'Projects, Scrum',
-    'description': """
+    "name": 'Project Scrum Management',
+    "description": u"""
 Scrum Module for OpenERP 8.0 (developped by David DRAPEAU <david.drapeau@el2de.com>)
 
 This application respects the scrum.org protocol and has been developed and is maintened by ITIL Certified Member (in course of certification).
@@ -34,46 +31,36 @@ Manage
         * Burdown Chart (based on story points)
         * Sprints Velocity (for each Scrum project)
     * Sandbox
-        * a developer of development team can add a user story to sandbox 
+        * a developer of development team can add a user story to sandbox
         * the product owner can valid it (transfer into product backlog) or delete it
 
 
 Thanks to report questions to david.drapeau@el2de.com
     """,
-    
-    'website': 'https://github.com/ddrapeau/openerp70-addons',
-    'images': [],
-    'depends': [
+    "version": "0.1",
+    "depends": [
         'base',
         'mail',
         'project',
     ],
-    'data': [
-        "project_scrum_report.xml",
-        "view/project_view.xml",
-        
-        "security/project_scrum_security.xml",
-        "security/ir.model.access.csv",
-        
-        
-        "wizard/project_scrum_backlog_create_task_view.xml",
-        "wizard/project_scrum_email_view.xml",
-        "wizard/user_story_sandbox_to_backlog_view.xml",
-        
-        "view/project_scrum_menu.xml",
-        "view/project_scrum_release_view.xml",
-        "view/project_scrum_role_view.xml",
-        "view/project_scrum_sandbox_view.xml",
-        "view/project_scrum_view.xml",
+    "author": "EL2DE - David DRAPEAU",
+    "category": "Project Scrum Management",
+    "installable" : True,
+    "auto_install" : False,
+    "data": [
+        'ir_ui_view_record.xml',
+        'project_scrum_report.xml',
+        'security/project_scrum_security.xml',
+        'security/ir.model.access.csv',
+        'wizard/project_scrum_backlog_create_task_view.xml',
+        'wizard/project_scrum_email_view.xml',
+        'wizard/user_story_sandbox_to_backlog_view.xml',
+        'view/project_scrum_menu.xml',
+        'view/project_scrum_release_view.xml',
+        'view/project_scrum_role_view.xml',
+        'view/project_scrum_sandbox_view.xml',
+        'view/project_scrum_view.xml',
+        'view/project_view.xml',
+        'views/project_scrum.xml',
     ],
-    'css': [
-        'static/src/css/project_scrum.css',
-    ],
-    'demo': [],
-    'test': [],
-    'application': True,
-    'installable': True,
-    'auto_install': False,
-    'web': True,
-    #'certificate': '',
 }

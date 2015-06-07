@@ -106,6 +106,7 @@
       <field name="context">{'default_project_id':active_id}</field>
     </record>
     <menuitem action="action_project_scrum_sprint" id="menu_action_project_scrum_sprint" parent="menu_scrum" name="Sprints"/>
+    
     <!-- Daily Meeting -->
     <record model="ir.ui.view" id="view_project_scrum_meeting_calendar">
       <field name="name">view.project.scrum.meeting.calendar</field>
@@ -169,6 +170,7 @@
       <field name="help">The scrum agile methodology is used in software development projects. In this methodology, a daily meeting is organized by the scrum master with his team in order to detect the difficulties the team faced/will face.</field>
     </record>
     <menuitem sequence="30" action="action_meeting_form" id="menu_action_meeting_form" name="Daily Meeting" parent="menu_scrum"/>
+    
     <!-- product backlog stage -->
     <record model="ir.ui.view" id="view_project_scrum_pb_stage_tree">
       <field name="name">view.project.scrum.pb.stage.tree</field>
@@ -204,6 +206,7 @@
       <field name="view_mode">tree,form</field>
     </record>
     <menuitem action="action_project_scrum_pb_stage" id="menu_action_project_scrum_pb_stage" parent="menu_scrum_configuration" name="Stages" sequence="1"/>
+    
     <!-- story Feature -->
     <record model="ir.ui.view" id="view_project_scrum_story_feature_tree">
       <field name="name">view.project.scrum.story.feature.tree</field>
@@ -239,6 +242,7 @@
       <field name="view_mode">tree,form</field>
     </record>
     <menuitem action="action_project_scrum_story_feature" id="menu_action_project_scrum_story_feature" parent="menu_scrum_configuration" name="Features" sequence="1"/>
+    
     <!-- product backlog -->
     <record model="ir.ui.view" id="view_project_scrum_product_backlog_kanban">
       <field name="name">view.project.scrum.product.backlog.kanban</field>
@@ -333,7 +337,9 @@
             <h1><field name="id"/></h1>
             <field name="state" invisible="1"/>
             <group colspan="4">
+              <field name="role_id"/> <!-- As -->
               <field name="name"/>
+              <field name="in_order_to"/>
             </group>
             <group>
               <group>

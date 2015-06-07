@@ -115,7 +115,7 @@ class projectScrumSprint(models.Model):
             self.product_owner_id = self.release_id.product_owner_id
             self.scrum_master_id = self.release_id.scrum_master_id
 
-    name =  fields.Char('Sprint Name', required=True, size=64)
+    name =  fields.Char('Sprint Name', required=True, size=128)
     date_start = fields.Date('Starting Date', default=lambda self: fields.Date.today(self), required=True)
     date_stop = fields.Date('Ending Date', required=True)
     release_id = fields.Many2one('project.scrum.release', string='Release', domain="[('project_id','=', project_id)]", required=True)
@@ -156,9 +156,9 @@ class projectScrumSprint(models.Model):
     def _check_only_one_open(self):
         # Only one sprint can be open byt project_id/release_id
         opened_sprint_ids = self.search_count([('project_id', '=', self.project_id.id),('state','=','open'),('release_id','=', self.release_id.id)])
-	if opened_sprint_ids > 0:
+        if opened_sprint_ids > 0:
             return False
-	return True
+        return True
 
 class projectScrumMeeting(models.Model):
     _name = 'project.scrum.meeting'
@@ -387,12 +387,13 @@ class projectScrumProductBacklog(models.Model):
         tasks_done = [task for task in self.tasks_id if task.stage_id and task.stage_id.code == 'done']
         self.task_count_done = len(tasks_done)
 
+    role_id = fields.Many2one('project.scrum.role', string="As", required=True, readonly=True, states={'draft':[('readonly',False)]})
+    name = fields.Char('Name', size=128, required=True, readonly=False)
+    in_order_to = fields.Char('For', size=128, readonly=True, states={'draft':[('readonly',False)]})
+    
     task_count = fields.Integer(compute='_count_tasks', string='Count tasks')
     task_count_done = fields.Integer(compute='_count_tasks_done', string='Count tasks Done')
     priority =  fields.Selection([('0','Low'), ('1','Normal'), ('2','High')], 'Priority', select=True, default='1')
-    role_id = fields.Many2one('project.scrum.role', string="As", readonly=True, states={'draft':[('readonly',False)]})
-    name = fields.Char('Name', size=128, required=True, readonly=False)
-    for_then = fields.Char('For', size=128, readonly=True, states={'draft':[('readonly',False)]})
     acceptance_testing = fields.Text("Acceptance testing", readonly=True, states={'draft':[('readonly',False)]})
 
     description = fields.Text("Description", default='En tant que: \nJe veux: \nPour: \n')

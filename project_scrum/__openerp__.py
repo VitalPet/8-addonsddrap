@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 {
     "name": 'Project Scrum Management',
     "description": u"""
@@ -37,13 +36,13 @@ Manage
 
 Thanks to report questions to david.drapeau@el2de.com
     """,
-    "version": "0.1",
+    "version": "1.1",
     "depends": [
         'base',
         'mail',
         'project',
     ],
-    "author": "EL2DE - David DRAPEAU",
+    "author": "David DRAPEAU <d.drapeau@gmail.com>",
     "category": "Project Scrum Management",
     "installable" : True,
     "auto_install" : False,
